@@ -21,13 +21,13 @@ export default class App extends React.Component {
     if (!this.state.isShowingImage) {
       return (
         <View style={styles.container}>
-          <Text style={{ top: 20, color: "white" }}>WASSUP DAWGGGG???</Text>
+          <Text style={styles.text1}>WASSUP DAWGGGG???</Text>
         </View>
       );
     }
     return (
       <View style={styles.container}>
-        <Image source={myPic} style={{ width: 280, height: 500 }} />
+        <Image source={myPic} style={styles.image1} />
       </View>
     );
   }
@@ -40,5 +40,13 @@ const styles = StyleSheet.create({
     //color: "#fff",
     alignItems: "center",
     justifyContent: "center"
+  },
+  text1: {
+    top: 20,
+    color: "white"
+  },
+  image1: {
+    width: 280,
+    height: 500
   }
 });
