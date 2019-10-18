@@ -5,7 +5,8 @@ import {
   View,
   TextInput,
   Button,
-  TouchableHighlight
+  TouchableHighlight,
+  ScrollView
 } from "react-native";
 import { Image } from "react-native";
 import myPic from "./assets/1.jpg";
@@ -30,9 +31,11 @@ export default class App extends React.Component {
   render() {
     // if (!this.state.isShowingImage) {
     return (
-      <View style={styles.container1}>
-        <Image source={myPic} style={styles.image1} />
-        <Text style={styles.text1}>WASSUP DAWGGGG???</Text>
+      <ScrollView style={styles.container0} horizontal pagingEnabled>
+        <View style={styles.container1}>
+          <Image source={myPic} style={styles.image1} />
+          <Text style={styles.text1}>WASSUP DAWGGGG???</Text>
+        </View>
         <View style={styles.container2}>
           <Text style={styles.text1}>Write answer =></Text>
           <TextInput
@@ -42,7 +45,9 @@ export default class App extends React.Component {
             value={this.state.answer}
           />
         </View>
-        <Text style={styles.text2}>Answer => {this.state.answer}</Text>
+        <View style={styles.container1}>
+          <Text style={styles.text2}>Answer => {this.state.answer}</Text>
+        </View>
         <View style={styles.container2}>
           <Button
             onPress={this.buttonClick}
@@ -55,25 +60,31 @@ export default class App extends React.Component {
             </View>
           </TouchableHighlight>
         </View>
-      </View>
+      </ScrollView>
     );
   }
 }
 
 const styles = StyleSheet.create({
+  container0: {
+    flex: 1,
+    backgroundColor: "black"
+  },
   container1: {
     flex: 1,
     backgroundColor: "black",
     alignItems: "center",
-    justifyContent: "center"
+    justifyContent: "flex-start",
+    flexShrink: 0.5,
+    top: 100
   },
   container2: {
-    flex: 2,
-    top: -80,
+    flex: 1,
     backgroundColor: "black",
-    alignItems: "flex-start",
+    alignItems: "center",
     justifyContent: "flex-start",
-    flexDirection: "row"
+    flexDirection: "row",
+    backgroundColor: "black"
   },
   text1: {
     textAlign: "center",
@@ -82,12 +93,12 @@ const styles = StyleSheet.create({
   },
   text2: {
     color: "white",
-    top: -200,
     flex: 1,
     justifyContent: "flex-start"
   },
   image1: {
-    flex: 4,
+    flex: 1,
+    width: "80%",
     resizeMode: "contain"
   },
   input1: {
