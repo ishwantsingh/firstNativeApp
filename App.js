@@ -1,5 +1,7 @@
 import React from "react";
 import {
+  FlatList,
+  ActivityIndicator,
   StyleSheet,
   Text,
   View,
@@ -13,25 +15,34 @@ import myPic from "./assets/1.jpg";
 
 export default class App extends React.Component {
   state = {
-    isShowingText: true,
-    isShowingImage: false,
+    // isShowingText: true,
+    // isShowingImage: false,
+    isLoading: true,
     answer: ""
   };
   buttonClick = () => {
     alert("you liked the answer");
   };
-  // componentDidMount() {
-  //   setInterval(() => {
-  //     this.setState(previousState => ({
-  //       isShowingText: !previousState.isShowingText,
-  //       isShowingImage: !previousState.isShowingImage
-  //     }));
-  //   }, 700);
-  // }
+  componentDidMount() {
+    //   setInterval(() => {
+    //     this.setState(previousState => ({
+    //       isShowingText: !previousState.isShowingText,
+    //       isShowingImage: !previousState.isShowingImage
+    //     }));
+    //   }, 700);
+
+    return fetch("https://facebook.github.io/react-native/movies.json")
+      .then(res => res.json())
+      .then(data => {
+        this.setState({ isLoading: false, movieList: data.movies });
+      })
+      .catch(err => console.log(err));
+  }
   render() {
     // if (!this.state.isShowingImage) {
     return (
-      <ScrollView style={styles.container0} horizontal pagingEnabled>
+      // <ScrollView style={styles.container0} horizontal pagingEnabled>
+      <View style={styles.container0}>
         <View style={styles.container1}>
           <Image source={myPic} style={styles.image1} />
           <Text style={styles.text1}>WASSUP DAWGGGG???</Text>
@@ -60,7 +71,25 @@ export default class App extends React.Component {
             </View>
           </TouchableHighlight>
         </View>
-      </ScrollView>
+        {this.state.isLoading ? (
+          <View style={{ flex: 1, padding: 20 }}>
+            <ActivityIndicator />
+          </View>
+        ) : (
+          <View style={styles.container1}>
+            <FlatList
+              data={this.state.movieList}
+              renderItem={({ item }) => (
+                <Text style={styles.text1}>
+                  {item.title}, {item.releaseYear}
+                </Text>
+              )}
+              keyExtractor={({ id }, index) => id}
+            />
+          </View>
+        )}
+      </View>
+      /* </ScrollView> */
     );
   }
 }
@@ -68,15 +97,19 @@ export default class App extends React.Component {
 const styles = StyleSheet.create({
   container0: {
     flex: 1,
-    backgroundColor: "black"
+    backgroundColor: "black",
+    alignItems: "center",
+    justifyContent: "center",
+    borderWidth: 1,
+    borderColor: "white"
   },
   container1: {
     flex: 1,
     backgroundColor: "black",
     alignItems: "center",
     justifyContent: "flex-start",
-    flexShrink: 0.5,
-    top: 100
+    borderWidth: 1,
+    borderColor: "white"
   },
   container2: {
     flex: 1,
@@ -84,7 +117,8 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "flex-start",
     flexDirection: "row",
-    backgroundColor: "black"
+    borderWidth: 1,
+    borderColor: "white"
   },
   text1: {
     textAlign: "center",
@@ -98,8 +132,8 @@ const styles = StyleSheet.create({
   },
   image1: {
     flex: 1,
-    width: "80%",
-    resizeMode: "contain"
+    width: "80%"
+    // resizeMode: "contain"
   },
   input1: {
     flex: 1,
