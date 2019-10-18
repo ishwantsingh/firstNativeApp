@@ -1,5 +1,12 @@
 import React from "react";
-import { StyleSheet, Text, View, TextInput, Button } from "react-native";
+import {
+  StyleSheet,
+  Text,
+  View,
+  TextInput,
+  Button,
+  TouchableHighlight
+} from "react-native";
 import { Image } from "react-native";
 import myPic from "./assets/1.jpg";
 
@@ -36,7 +43,18 @@ export default class App extends React.Component {
           />
         </View>
         <Text style={styles.text2}>Answer => {this.state.answer}</Text>
-        <Button onPress={this.buttonClick} title=" I like the answer" />
+        <View style={styles.container2}>
+          <Button
+            onPress={this.buttonClick}
+            title=" I like the answer"
+            style={styles.button1}
+          />
+          <TouchableHighlight onPress={this.buttonClick} underlayColor="white">
+            <View style={styles.container3}>
+              <Text style={styles.text1}>TouchableHighlight- but-2</Text>
+            </View>
+          </TouchableHighlight>
+        </View>
       </View>
     );
   }
@@ -58,6 +76,7 @@ const styles = StyleSheet.create({
     flexDirection: "row"
   },
   text1: {
+    textAlign: "center",
     color: "white",
     flex: 1
   },
@@ -75,5 +94,15 @@ const styles = StyleSheet.create({
     flex: 1,
     color: "black",
     backgroundColor: "white"
+  },
+  button1: {
+    top: 0
+  },
+  container3: {
+    marginLeft: 30,
+    backgroundColor: "#2196F3",
+    alignItems: "center",
+    justifyContent: "center",
+    height: 30
   }
 });
