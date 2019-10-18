@@ -15,8 +15,8 @@ import myPic from "./assets/1.jpg";
 
 export default class App extends React.Component {
   state = {
-    // isShowingText: true,
-    // isShowingImage: false,
+    isShowingText: true,
+    isShowingImage: false,
     isLoading: true,
     answer: ""
   };
@@ -43,8 +43,8 @@ export default class App extends React.Component {
     return (
       // <ScrollView style={styles.container0} horizontal pagingEnabled>
       <View style={styles.container0}>
-        <View style={styles.container1}>
-          <Image source={myPic} style={styles.image1} />
+        <Image source={myPic} style={styles.image1} />
+        <View style={styles.container2}>
           <Text style={styles.text1}>WASSUP DAWGGGG???</Text>
         </View>
         <View style={styles.container2}>
@@ -131,9 +131,10 @@ const styles = StyleSheet.create({
     justifyContent: "flex-start"
   },
   image1: {
-    flex: 1,
-    width: "80%"
-    // resizeMode: "contain"
+    flex: 4,
+    width: "80%",
+    resizeMode: "contain"
+    //  top: 200
   },
   input1: {
     flex: 1,
