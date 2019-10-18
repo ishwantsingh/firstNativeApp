@@ -1,5 +1,5 @@
 import React from "react";
-import { StyleSheet, Text, View, TextInput } from "react-native";
+import { StyleSheet, Text, View, TextInput, Button } from "react-native";
 import { Image } from "react-native";
 import myPic from "./assets/1.jpg";
 
@@ -9,7 +9,9 @@ export default class App extends React.Component {
     isShowingImage: false,
     answer: ""
   };
-
+  buttonClick = () => {
+    alert("you liked the answer");
+  };
   // componentDidMount() {
   //   setInterval(() => {
   //     this.setState(previousState => ({
@@ -33,7 +35,8 @@ export default class App extends React.Component {
             value={this.state.answer}
           />
         </View>
-        <Text style={styles.text1}>Answer => {this.state.answer}</Text>
+        <Text style={styles.text2}>Answer => {this.state.answer}</Text>
+        <Button onPress={this.buttonClick} title=" I like the answer" />
       </View>
     );
   }
@@ -51,12 +54,18 @@ const styles = StyleSheet.create({
     top: -80,
     backgroundColor: "black",
     alignItems: "flex-start",
-    justifyContent: "center",
+    justifyContent: "flex-start",
     flexDirection: "row"
   },
   text1: {
     color: "white",
     flex: 1
+  },
+  text2: {
+    color: "white",
+    top: -200,
+    flex: 1,
+    justifyContent: "flex-start"
   },
   image1: {
     flex: 4,
